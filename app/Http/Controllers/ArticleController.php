@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate();
+        $articles = Article::latest()->simplepaginate();
         return view('articles.index', compact('articles'));
     }
 
