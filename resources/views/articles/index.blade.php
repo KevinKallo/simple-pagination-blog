@@ -4,6 +4,7 @@
     <div class="container mx-auto">
         <a class="btn btn-primary" href="{{route('articles.create')}}">New Article</a>
         <a class="btn btn-secondary" href="{{route('articles.deleted')}}">Deleted articles</a>
+
         {{$articles->links()}}
         <table class="table">
             <thead>
@@ -24,10 +25,9 @@
                             <div class="join">
                                 <a class="btn btn-info join-item">View</a>
                                 <a href="{{route('articles.edit', ['article' => $article])}}" class="btn btn-warning join-item">Edit</a>
-                                <input type="submit" class="btn btn-error join-item" value="Delete" form="delete--{{$article->id}}">
+                                <input type="submit" class="btn btn-error join-item" value="Delete" form="delete-{{$article->id}}">
                             </div>
-
-                            <form id="delete--{{$article->id}}" action="{{route('articles.destroy', ['article' => $article])}}" method="POST">
+                            <form id="delete-{{$article->id}}" action="{{route('articles.destroy', ['article' => $article])}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                             </form>

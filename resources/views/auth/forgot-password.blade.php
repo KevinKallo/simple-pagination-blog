@@ -1,4 +1,9 @@
-<x-guest-layout>
+@extends('partials.layout')
+
+@section('content')
+    <div class="container mx-auto w-1/2">
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
@@ -22,4 +27,6 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+            </div>
+        </div>
+    </div>

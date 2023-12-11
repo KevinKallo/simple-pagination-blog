@@ -13,6 +13,10 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory(100)->create();
+        $articles = Article::factory(100)->make();
+        $articles = $articles->sortBy('created_at');
+        foreach ($articles as $article){
+            $article->save();
+        }
     }
 }

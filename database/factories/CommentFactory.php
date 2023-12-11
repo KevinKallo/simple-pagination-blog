@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
  */
-class ArticleFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,21 +20,16 @@ class ArticleFactory extends Factory
     {
         $created = fake()->dateTimeBetween('-5 years', 'now');
         $updated = fake()->dateTimeBetween($created, 'now');
-        $deleted = null;
+
         if(rand(0,9) !== 0){
             $updated = $created;
         }
-        if(rand(0,9) === 0){
-            $deleted = fake()->dateTimeBetween($created, 'now');
-        }
-
         return [
-            'title' => fake()->sentence,
-            'body' => fake()->paragraphs(3, true),
+            'body' => fake()->sentences(3, true),
+            'article_id' => Article::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
             'created_at' => $created,
             'updated_at' => $updated,
-            'deleted_at' => $deleted,
-            'user_id' => User::inRandomOrder()->first()->id
         ];
     }
 }

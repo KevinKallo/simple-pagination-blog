@@ -16,6 +16,28 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a class="btn">Button</a>
+        @guest
+            <a href="{{route('register')}}" class="btn btn-primary mr-3">Register</a>
+            <a href="{{route('login')}}" class="btn btn-secondary">Login</a>
+        @else
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <details>
+                        <summary>
+                            {{ Auth::user()->name }}
+                        </summary>
+                        <ul class="p-2 z-20 bg-base-100">
+                            <li><a href="{{route('profile.edit')}}">Profile</a></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <input type="submit" value="Logout">
+                                </form>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        @endif
     </div>
 </div>

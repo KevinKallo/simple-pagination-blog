@@ -14,14 +14,29 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        $tags = Tag::factory(20)->create();
-        $articles = Article::all();
-        foreach ($articles as $article){
-            $randCount = rand(0, 5);
-            $randTags = $tags->random($randCount);
-            foreach ($randTags as $tag){
-                $article->tags()->attach($tag);
-            }
-        }
+        Tag::factory(1)->create([
+            'name' => "🔥🔥🔥🔥🔥",
+        ]);
+        Tag::factory(1)->create([
+            'name' => "🔥🔥🔥🔥",
+        ]);
+        Tag::factory(1)->create([
+            'name' => "🔥🔥🔥",
+        ]);
+        Tag::factory(1)->create([
+            'name' => "🔥🔥",
+        ]);
+        Tag::factory(1)->create([
+            'name' => "🔥",
+        ]);
+        //$tags = Tag::factory(20)->create();
+        // $articles = Article::all();
+        // foreach ($articles as $article){
+        //     $randCount = rand(0, 5);
+        //     $randTags = $tags->random($randCount);
+        //     foreach ($randTags as $tag){
+        //         $article->tags()->attach($tag);
+        //     }
+        // }
     }
 }

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Image;
+use App\Models\Tag;
+use App\Models\Spice;
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -13,13 +18,17 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->simplepaginate();
+        //$articles = User::find(3)->articles()->latest()->paginate();
+        $articles = auth()->user()->articles()->latest()->paginate();
         return view('articles.index', compact('articles'));
     }
 
+    /**
+     * Display a listing of the deleted resource.
+     */
     public function deleted()
     {
-        $articles = Article::onlyTrashed()->orderby('deleted_at')->paginate();
+        $articles = Article::onlyTrashed()->orderBy('deleted_at')->paginate();
         return view('articles.index', compact('articles'));
     }
 
@@ -28,7 +37,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $tags = Tag::all();
+        return view('articles.create', compact('tags'));
     }
 
     /**
@@ -36,9 +46,25 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-
         $article = new Article($request->validated());
+        $article->user()->associate(auth()->user());
         $article->save();
+
+        if($request->file('images')){
+            foreach($request->file('images') as $image){
+                $file = $image->store('/public');
+                $img = new Image();
+                $img->path = Storage::url($file);
+                $img->article()->associate($article);
+                $img->save();
+            }
+        }
+
+        if($request->input('tags')){
+            foreach($request->input('tags') as $tagId){
+                $article->tags()->attach($tagId);
+            }
+        }
         return redirect()->route('articles.index');
     }
 
@@ -63,8 +89,8 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-    //    $article->title = $request->validated('title');
-    //    $article->body = $request->validated('title');
+//        $article->title = $request->validated('title');
+//        $article->body = $request->validated('body');
         $article->fill($request->validated());
         $article->save();
         return redirect()->route('articles.index');

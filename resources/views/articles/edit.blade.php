@@ -4,15 +4,16 @@
     <div class="container mx-auto w-1/2">
         <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
-                <form action="{{route('articles.update', ['article' => $article->id])}}" method="POST">
+                <form action="{{route('articles.update', ['article' => $article])}}" method="POST">
                     @csrf
                     @method('PUT')
+
                     <div class="form-control w-full">
                         <label class="label">
                             <span class="label-text">Title</span>
 
                         </label>
-                        <input name="title" type="text" value="{{$article->title}}" placeholder="Article Title" class="input input-bordered w-full @error('title') input-error @enderror"/>
+                        <input name="title" type="text" value="{{$article->title}}" placeholder="Article Title" class="input input-bordered w-full @error('title') input-error @enderror" />
                         @error('title')
                         <label class="label">
                             <span class="label-text-alt text-error">{{$message}}</span>
@@ -29,6 +30,18 @@
                         <label class="label">
                             <span class="label-text-alt text-error">{{$message}}</span>
                         </label>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Images</span>
+                        </label>
+                        <input name="images[]" type="file" multiple class="file-input input-bordered w-full @error('images.*') input-error @enderror" accept="image/*"/>
+                        @error('images.*')
+                            <label class="label">
+                                <span class="label-text-alt text-error">{{$message}}</span>
+                            </label>
                         @enderror
                     </div>
                     <input type="submit" value="Update" class="btn btn-primary mt-3">

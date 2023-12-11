@@ -1,5 +1,6 @@
 <li><a href="/">Home</a></li>
 <li><a href="/about">About</a></li>
+@auth
 <li>
     <details>
         <summary>
@@ -10,3 +11,4 @@
         </ul>
     </details>
 </li>
+@endauth
