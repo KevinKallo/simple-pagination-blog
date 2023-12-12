@@ -20,12 +20,9 @@
                         @endif
                         <div class="card-body">
                             <h2 class="card-title">{{ $article->title }}</h2>
+                            <h2 class="card-cost">Cost  {{ $article->cost }}€</h2>
                             <p>{{ $article->snippet }}</p>
                             <div class="stat">
-                                <div class="stat-desc">{{ $article->user->name }}</div>
-                                <div class="stat-desc"><b>Comments: </b>{{ $article->comments()->count() }}</div>
-                                <div class="stat-desc"><b>Likes: </b>{{ $article->likes()->count() }}</div>
-                                <div class="stat-desc">{{ $article->created_at->diffForHumans() }}</div>
                                 <div class="stat-desc flex flex-wrap">
                                     @foreach($article->tags as $tag)
                                         <a href="{{route('public.tag', ['tag' => $tag])}}">
@@ -34,6 +31,20 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <fieldset>
+                                <div>
+                                    <input type="checkbox" id="gluteen" name="gluteen" disabled  />
+                                    <label for="gluteen">{{$article->gluteen}}Gluteeni vaba</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="vegan" name="vegan" disabled />
+                                    <label for="vegan">{{$article->vegan}}Vegan</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="taime" name="taime" disabled/>
+                                    <label for="taime">{{$article->taime}}Taimetoitlastele</label>
+                                </div>
+                            </fieldset>
                             <div class="card-actions justify-end">
                                 <form action="{{route('like', ['article' => $article])}}" method="POST">
                                     @csrf
@@ -41,6 +52,7 @@
                                 </form>
                                 <a href="{{route('public.article', ['article' => $article])}}" class="btn btn-primary">Read More</a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

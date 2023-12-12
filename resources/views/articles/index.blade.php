@@ -10,6 +10,7 @@
             <thead>
                 <th>Id</th>
                 <th>Title</th>
+                <th>Cost</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Actions</th>
@@ -19,6 +20,7 @@
                     <tr>
                         <td>{{$article->id}}</td>
                         <td>{{$article->title}}</td>
+                        <td>{{$article->cost}}</td>
                         <td>{{$article->created_at}}</td>
                         <td>{{$article->updated_at}}</td>
                         <td>

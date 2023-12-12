@@ -21,6 +21,19 @@
                     </div>
                     <div class="form-control w-full">
                         <label class="label">
+                            <span class="label-text">Hind</span>
+
+                        </label>
+                        <input id="cost" name="cost" type="number" placeholder="0" class="input input-bordered w-full @error('cost') input-error @enderror"/>
+                        @error('cost')
+                            <label class="label">
+                                <span class="label-text-alt text-error">{{$message}}</span>
+
+                            </label>
+                        @enderror
+                    </div>
+                    <div class="form-control w-full">
+                        <label class="label">
                             <span class="label-text">Content</span>
                         </label>
                         <textarea name="body" class="textarea textarea-bordered @error('title') textarea-error @enderror" placeholder="Content here"></textarea>
@@ -45,7 +58,20 @@
                             </label>
                         @enderror
                     </div>
-
+                    <fieldset>
+                    <div>
+                        <label for="scales">Gluteeni vaba</label>
+                        <input type="checkbox" id="gluteeni" name="gluteeni" />
+                    </div>
+                    <div>
+                        <label for="horns">Vegan</label>
+                        <input type="checkbox" id="vegan" name="vegan" />
+                    </div>
+                    <div>
+                        <label for="horns">Taimetoitlastele</label>
+                        <input type="checkbox" id="taime" name="taime" />
+                    </div>
+                    </fieldset>
                     <div class="form-control w-full">
                         <label class="label">
                             <span class="label-text">Images</span>

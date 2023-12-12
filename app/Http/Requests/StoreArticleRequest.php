@@ -24,7 +24,8 @@ class StoreArticleRequest extends FormRequest
         return [
             'title' => 'required',
             'body' => 'required',
-            'images.*' => 'image'
+            'images.*' => 'image',
+            'cost' => 'required|numeric',
         ];
     }
 }

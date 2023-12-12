@@ -7,7 +7,6 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Image;
 use App\Models\Tag;
-use App\Models\Spice;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
